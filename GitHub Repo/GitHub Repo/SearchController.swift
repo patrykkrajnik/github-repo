@@ -51,16 +51,25 @@ class SearchController: UIViewController, UISearchBarDelegate {
         
         return searchController
     }()
+    
+//    lazy var repositoriesLabel: UILabel = {
+//        let label = UILabel()
+//
+//        label.translatesAutoresizingMaskIntoConstraints = false
+//        label.font = UIFont.systemFont(ofSize: 14, weight: .bold)
+//
+//        return label
+//    }()
 
     override func viewDidLoad() {
         super.viewDidLoad()
         safeArea = view.layoutMarginsGuide
         self.view.backgroundColor = .white
         setupElements()
+        //setupLabel()
         self.title = "Search"
         navigationController?.navigationBar.prefersLargeTitles = true
         navigationItem.searchController = searchBar
-        // Do any additional setup after loading the view.
     }
 
     func filteredContentForSearchText(searchText: String) {
@@ -99,12 +108,13 @@ extension SearchController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 100
+        return 150
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as?
                 SearchCell else { return UITableViewCell() }
+        cell.accessoryType = .disclosureIndicator
         
         let currentRepositories: Repositories
         
@@ -131,4 +141,13 @@ extension SearchController {
         repoList.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
         repoList.rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true
     }
+    
+//    func setupLabel() {
+//        view.addSubview(repositoriesLabel)
+//
+//        repositoriesLabel.topAnchor.constraint(equalTo: safeArea.topAnchor).isActive = true
+//        repositoriesLabel.bottomAnchor.constraint(equalTo: repoList.bottomAnchor).isActive = true
+//        repositoriesLabel.rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true
+//        repositoriesLabel.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 20).isActive = true
+//    }
 }

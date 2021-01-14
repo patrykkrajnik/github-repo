@@ -25,11 +25,18 @@ class SearchCell: UITableViewCell {
         return label
     }()
     
+    let avatar: UIImageView = {
+       let image = UIImageView()
+        
+        return image
+    }()
+    
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
         addSubview(repoTitle)
         addSubview(starsNumber)
+        //addSubview(avatar)
         
         repoTitle.topAnchor.constraint(equalTo: topAnchor).isActive = true
         repoTitle.leftAnchor.constraint(equalTo: leftAnchor, constant: 20).isActive = true
@@ -38,7 +45,7 @@ class SearchCell: UITableViewCell {
         
         starsNumber.topAnchor.constraint(equalTo: topAnchor).isActive = true
         starsNumber.widthAnchor.constraint(equalToConstant: 120).isActive = true
-        starsNumber.rightAnchor.constraint(equalTo: rightAnchor, constant: -20).isActive = true
+        starsNumber.rightAnchor.constraint(equalTo: rightAnchor, constant: -100).isActive = true
         starsNumber.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true 
     }
     
