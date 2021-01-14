@@ -12,6 +12,7 @@
 		DC0B1D4425B04F4300E11E82 /* SearchController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC0B1D4325B04F4300E11E82 /* SearchController.swift */; };
 		DC0B1D4925B04F4400E11E82 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DC0B1D4825B04F4400E11E82 /* Assets.xcassets */; };
 		DC0B1D4C25B04F4400E11E82 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DC0B1D4A25B04F4400E11E82 /* LaunchScreen.storyboard */; };
+		DCBAAB3E25B0812200445F95 /* SearchCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCBAAB3D25B0812200445F95 /* SearchCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,6 +23,7 @@
 		DC0B1D4825B04F4400E11E82 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		DC0B1D4B25B04F4400E11E82 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		DC0B1D4D25B04F4400E11E82 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		DCBAAB3D25B0812200445F95 /* SearchCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -57,6 +59,7 @@
 				DC0B1D3F25B04F4300E11E82 /* AppDelegate.swift */,
 				DC0B1D4125B04F4300E11E82 /* SceneDelegate.swift */,
 				DC0B1D4325B04F4300E11E82 /* SearchController.swift */,
+				DCBAAB3D25B0812200445F95 /* SearchCell.swift */,
 				DC0B1D4825B04F4400E11E82 /* Assets.xcassets */,
 				DC0B1D4A25B04F4400E11E82 /* LaunchScreen.storyboard */,
 				DC0B1D4D25B04F4400E11E82 /* Info.plist */,
@@ -134,6 +137,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				DC0B1D4425B04F4300E11E82 /* SearchController.swift in Sources */,
+				DCBAAB3E25B0812200445F95 /* SearchCell.swift in Sources */,
 				DC0B1D4025B04F4300E11E82 /* AppDelegate.swift in Sources */,
 				DC0B1D4225B04F4300E11E82 /* SceneDelegate.swift in Sources */,
 			);
