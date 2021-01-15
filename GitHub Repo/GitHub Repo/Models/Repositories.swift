@@ -7,8 +7,6 @@
 
 import Foundation
 
-struct Repositories: Decodable {
-    let totalCount: Int
-    let incompleteResults: Bool
-    let items: ItemInfo
+struct Repositories: Codable {
+    var items: [Item]
 }

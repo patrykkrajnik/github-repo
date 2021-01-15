@@ -9,21 +9,24 @@ import UIKit
 
 class SearchController: UIViewController, UISearchBarDelegate {
     
-    var filteredRepos = [Repositories]()
-    let repos = Repositories.GetAllRepos()
+    var items = [Item]()
+    var owners = [Owner]()
+    
+    var filteredRepos = [Repositories2]()
+    let repos = Repositories2.GetAllRepos()
     var safeArea: UILayoutGuide!
     
-    struct Repositories {
+    struct Repositories2 {
         let title: String
         let stars: String
         
-        static func GetAllRepos() -> [Repositories] {
+        static func GetAllRepos() -> [Repositories2] {
             return [
-                Repositories(title: "Hi", stars: "2137"),
-                Repositories(title: "Hello", stars: "69"),
-                Repositories(title: "World", stars: "10"),
-                Repositories(title: "Good", stars: "1000"),
-                Repositories(title: "Morning", stars: "800")
+                Repositories2(title: "Hi", stars: "2137"),
+                Repositories2(title: "Hello", stars: "69"),
+                Repositories2(title: "World", stars: "10"),
+                Repositories2(title: "Good", stars: "1000"),
+                Repositories2(title: "Morning", stars: "800")
             ]
         }
     }
@@ -70,10 +73,36 @@ class SearchController: UIViewController, UISearchBarDelegate {
         self.title = "Search"
         navigationController?.navigationBar.prefersLargeTitles = true
         navigationItem.searchController = searchBar
+        
+        let urlString = "https://api.github.com/search/repositories?q=tetris+language:swift"
+        
+        if let url = URL(string: urlString) {
+            print("1")
+            if let data = try? Data(contentsOf: url) {
+                print("2")
+                parse(json: data)
+            }
+        }
+    }
+    
+    func parse(json: Data) {
+        let decoder = JSONDecoder()
+        decoder.keyDecodingStrategy = .convertFromSnakeCase
+        print("3")
+        
+        if let jsonItems = try? decoder.decode(Repositories.self, from: json) {
+            print("4")
+            items = jsonItems.items
+            for item in jsonItems.items {
+                owners.append(item.owner)
+            }
+            //print(owners)
+            //print(items)
+        }
     }
 
     func filteredContentForSearchText(searchText: String) {
-        filteredRepos = repos.filter({ (repository: Repositories) -> Bool in
+        filteredRepos = repos.filter({ (repository: Repositories2) -> Bool in
             return repository.title.lowercased().contains(searchText.lowercased())
         })
         
@@ -116,7 +145,9 @@ extension SearchController: UITableViewDelegate, UITableViewDataSource {
                 SearchCell else { return UITableViewCell() }
         cell.accessoryType = .disclosureIndicator
         
-        let currentRepositories: Repositories
+        let currentRepositories: Repositories2
+        //let item = items[indexPath.row]
+        //let owner = owners[indexPath.row]
         
         if isFiltering() {
             currentRepositories = filteredRepos[indexPath.row]
@@ -125,6 +156,7 @@ extension SearchController: UITableViewDelegate, UITableViewDataSource {
         }
         
         cell.repoTitle.text = currentRepositories.title
+        //cell.repoTitle.text = owner.login
         cell.starsNumber.text = currentRepositories.stars
         
         return cell

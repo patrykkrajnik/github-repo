@@ -14,9 +14,8 @@
 		DC0B1D4C25B04F4400E11E82 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DC0B1D4A25B04F4400E11E82 /* LaunchScreen.storyboard */; };
 		DCBAAB3E25B0812200445F95 /* SearchCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCBAAB3D25B0812200445F95 /* SearchCell.swift */; };
 		DCBAAB4A25B0B32E00445F95 /* Repositories.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCBAAB4925B0B32E00445F95 /* Repositories.swift */; };
-		DCBAAB4E25B0B45600445F95 /* ItemInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCBAAB4D25B0B45600445F95 /* ItemInfo.swift */; };
 		DCBAAB5125B0B86900445F95 /* Owner.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCBAAB5025B0B86900445F95 /* Owner.swift */; };
-		DCBAAB5425B0B88900445F95 /* License.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCBAAB5325B0B88900445F95 /* License.swift */; };
+		DCD87E1425B211E100B2DDB6 /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCD87E1325B211E100B2DDB6 /* Item.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -29,9 +28,8 @@
 		DC0B1D4D25B04F4400E11E82 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		DCBAAB3D25B0812200445F95 /* SearchCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchCell.swift; sourceTree = "<group>"; };
 		DCBAAB4925B0B32E00445F95 /* Repositories.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Repositories.swift; sourceTree = "<group>"; };
-		DCBAAB4D25B0B45600445F95 /* ItemInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemInfo.swift; sourceTree = "<group>"; };
 		DCBAAB5025B0B86900445F95 /* Owner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Owner.swift; sourceTree = "<group>"; };
-		DCBAAB5325B0B88900445F95 /* License.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = License.swift; sourceTree = "<group>"; };
+		DCD87E1325B211E100B2DDB6 /* Item.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Item.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -80,9 +78,8 @@
 			isa = PBXGroup;
 			children = (
 				DCBAAB4925B0B32E00445F95 /* Repositories.swift */,
-				DCBAAB4D25B0B45600445F95 /* ItemInfo.swift */,
+				DCD87E1325B211E100B2DDB6 /* Item.swift */,
 				DCBAAB5025B0B86900445F95 /* Owner.swift */,
-				DCBAAB5325B0B88900445F95 /* License.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -173,12 +170,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				DC0B1D4425B04F4300E11E82 /* SearchController.swift in Sources */,
+				DCD87E1425B211E100B2DDB6 /* Item.swift in Sources */,
 				DCBAAB3E25B0812200445F95 /* SearchCell.swift in Sources */,
 				DCBAAB5125B0B86900445F95 /* Owner.swift in Sources */,
-				DCBAAB5425B0B88900445F95 /* License.swift in Sources */,
 				DCBAAB4A25B0B32E00445F95 /* Repositories.swift in Sources */,
 				DC0B1D4025B04F4300E11E82 /* AppDelegate.swift in Sources */,
-				DCBAAB4E25B0B45600445F95 /* ItemInfo.swift in Sources */,
 				DC0B1D4225B04F4300E11E82 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
