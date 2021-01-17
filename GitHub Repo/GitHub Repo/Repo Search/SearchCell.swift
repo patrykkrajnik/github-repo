@@ -12,6 +12,7 @@ class SearchCell: UITableViewCell {
     let repoTitle: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
+        label.font = UIFont.systemFont(ofSize: 18, weight: .bold)
         
         return label
     }()
@@ -19,14 +20,18 @@ class SearchCell: UITableViewCell {
     let starsNumber: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.font = UIFont.systemFont(ofSize: 14, weight: .bold)
-        label.textAlignment = .right
+        label.font = UIFont.systemFont(ofSize: 16, weight: .medium)
+        label.textColor = UIColor.lightGray
         
         return label
     }()
     
     let avatar: UIImageView = {
-       let image = UIImageView()
+        let image = UIImageView()
+        
+        image.translatesAutoresizingMaskIntoConstraints = false
+        image.clipsToBounds = true
+        image.layer.cornerRadius = 10
         
         return image
     }()
@@ -36,17 +41,21 @@ class SearchCell: UITableViewCell {
         
         addSubview(repoTitle)
         addSubview(starsNumber)
-        //addSubview(avatar)
+        addSubview(avatar)
         
-        repoTitle.topAnchor.constraint(equalTo: topAnchor).isActive = true
-        repoTitle.leftAnchor.constraint(equalTo: leftAnchor, constant: 20).isActive = true
-        repoTitle.rightAnchor.constraint(equalTo: starsNumber.leftAnchor).isActive = true
-        repoTitle.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
+        repoTitle.topAnchor.constraint(equalTo: topAnchor, constant: 25).isActive = true
+        repoTitle.leftAnchor.constraint(equalTo: leftAnchor, constant: 100).isActive = true
+        repoTitle.rightAnchor.constraint(equalTo: rightAnchor).isActive = true
         
-        starsNumber.topAnchor.constraint(equalTo: topAnchor).isActive = true
-        starsNumber.widthAnchor.constraint(equalToConstant: 120).isActive = true
-        starsNumber.rightAnchor.constraint(equalTo: rightAnchor, constant: -100).isActive = true
-        starsNumber.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true 
+        starsNumber.topAnchor.constraint(equalTo: topAnchor, constant: 30).isActive = true
+        starsNumber.leftAnchor.constraint(equalTo: leftAnchor, constant: 100).isActive = true
+        starsNumber.rightAnchor.constraint(equalTo: rightAnchor).isActive = true
+        starsNumber.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
+        
+        avatar.topAnchor.constraint(equalTo: topAnchor, constant: 20).isActive = true
+        avatar.leftAnchor.constraint(equalTo: leftAnchor, constant: 20).isActive = true
+        avatar.heightAnchor.constraint(equalToConstant: 60).isActive = true
+        avatar.widthAnchor.constraint(equalToConstant: 60).isActive = true
     }
     
     required init?(coder: NSCoder) {

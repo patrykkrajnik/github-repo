@@ -12,24 +12,8 @@ class SearchController: UIViewController, UISearchBarDelegate {
     var items = [Item]()
     var owners = [Owner]()
     
-    var filteredRepos = [Repositories2]()
-    let repos = Repositories2.GetAllRepos()
+    var isFirstSearchingDone = false
     var safeArea: UILayoutGuide!
-    
-    struct Repositories2 {
-        let title: String
-        let stars: String
-        
-        static func GetAllRepos() -> [Repositories2] {
-            return [
-                Repositories2(title: "Hi", stars: "2137"),
-                Repositories2(title: "Hello", stars: "69"),
-                Repositories2(title: "World", stars: "10"),
-                Repositories2(title: "Good", stars: "1000"),
-                Repositories2(title: "Morning", stars: "800")
-            ]
-        }
-    }
     
     lazy var repoList: UITableView = {
         let tableView = UITableView()
@@ -37,7 +21,8 @@ class SearchController: UIViewController, UISearchBarDelegate {
         tableView.delegate = self
         tableView.dataSource = self
         tableView.register(SearchCell.self, forCellReuseIdentifier: "cell")
-        
+        tableView.separatorStyle = .none
+
         return tableView
     }()
     
@@ -55,58 +40,71 @@ class SearchController: UIViewController, UISearchBarDelegate {
         return searchController
     }()
     
-//    lazy var repositoriesLabel: UILabel = {
-//        let label = UILabel()
-//
-//        label.translatesAutoresizingMaskIntoConstraints = false
-//        label.font = UIFont.systemFont(ofSize: 14, weight: .bold)
-//
-//        return label
-//    }()
+    lazy var repositoriesLabel: UILabel = {
+        let label = UILabel()
+
+        label.text = "Repositories"
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.font = UIFont.systemFont(ofSize: 24, weight: .bold)
+
+        return label
+    }()
+    
+    lazy var initialRepoLabel: UILabel = {
+        let label = UILabel()
+
+        label.text = "Search repositories to display results"
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.font = UIFont.systemFont(ofSize: 18, weight: .medium)
+        label.textColor = UIColor.lightGray
+        label.textAlignment = .center
+
+        return label
+    }()
+    
+    lazy var avatarImage: UIImage = {
+        let avatar = UIImage()
+
+        return avatar
+    }()
 
     override func viewDidLoad() {
         super.viewDidLoad()
         safeArea = view.layoutMarginsGuide
         self.view.backgroundColor = .white
-        setupElements()
-        //setupLabel()
+        setupRepoLabel()
+        setupInitialLabel()
         self.title = "Search"
         navigationController?.navigationBar.prefersLargeTitles = true
         navigationItem.searchController = searchBar
-        
-        let urlString = "https://api.github.com/search/repositories?q=tetris+language:swift"
-        
+    }
+    
+    func prepareToParse(query: String) {
+        let urlString = "https://api.github.com/search/repositories?q=\(query)&page=1&per_page=20"
+
         if let url = URL(string: urlString) {
-            print("1")
             if let data = try? Data(contentsOf: url) {
-                print("2")
                 parse(json: data)
             }
         }
     }
     
     func parse(json: Data) {
+        isFirstSearchingDone = true
+        
+        if isFirstSearchingDone {
+            setupElements()
+        }
+        
         let decoder = JSONDecoder()
         decoder.keyDecodingStrategy = .convertFromSnakeCase
-        print("3")
         
         if let jsonItems = try? decoder.decode(Repositories.self, from: json) {
-            print("4")
             items = jsonItems.items
             for item in jsonItems.items {
                 owners.append(item.owner)
             }
-            //print(owners)
-            //print(items)
         }
-    }
-
-    func filteredContentForSearchText(searchText: String) {
-        filteredRepos = repos.filter({ (repository: Repositories2) -> Bool in
-            return repository.title.lowercased().contains(searchText.lowercased())
-        })
-        
-        repoList.reloadData()
     }
     
     func isSearchBarEmpty() -> Bool {
@@ -116,13 +114,20 @@ class SearchController: UIViewController, UISearchBarDelegate {
     func isFiltering() -> Bool {
         return searchBar.isActive && (!isSearchBarEmpty())
     }
+    
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        let query = searchBar.text!
+        prepareToParse(query: query)
+        repoList.reloadData()
+    }
 
 }
 
 extension SearchController: UISearchResultsUpdating {
     func updateSearchResults(for searchController: UISearchController) {
-        //let searchBar = searchController.searchBar
-        filteredContentForSearchText(searchText: searchController.searchBar.text!)
+        if isFiltering() {
+            initialRepoLabel.removeFromSuperview()
+        }
     }
 }
 
@@ -130,35 +135,37 @@ extension SearchController: UITableViewDelegate, UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
-    
+
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if isFiltering() { return filteredRepos.count }
-        return repos.count
+        return items.count
     }
-    
+
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 100
     }
-    
+
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as?
                 SearchCell else { return UITableViewCell() }
         cell.accessoryType = .disclosureIndicator
+        cell.clipsToBounds = true
+        cell.layer.cornerRadius = 20
+        cell.backgroundColor = .systemGray6
+        cell.layer.borderWidth = 5.0
+        cell.layer.borderColor = UIColor.white.cgColor
+
+        let item = items[indexPath.row]
+        let owner = owners[indexPath.row]
         
-        let currentRepositories: Repositories2
-        //let item = items[indexPath.row]
-        //let owner = owners[indexPath.row]
-        
-        if isFiltering() {
-            currentRepositories = filteredRepos[indexPath.row]
-        } else {
-            currentRepositories = repos[indexPath.row]
+        var image = UIImage(named: "launchScreenLogo.png")
+        if let data = try? Data(contentsOf: owner.avatarUrl) {
+            image = UIImage(data: data)!
         }
-        
-        cell.repoTitle.text = currentRepositories.title
-        //cell.repoTitle.text = owner.login
-        cell.starsNumber.text = currentRepositories.stars
-        
+
+        cell.repoTitle.text = item.name
+        cell.starsNumber.text = item.stargazersCount.description
+        cell.avatar.image = image
+
         return cell
     }
 }
@@ -168,18 +175,26 @@ extension SearchController {
     func setupElements() {
         view.addSubview(repoList)
         
-        repoList.topAnchor.constraint(equalTo: safeArea.topAnchor).isActive = true
-        repoList.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
-        repoList.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
-        repoList.rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true
+        repoList.topAnchor.constraint(equalTo: repositoriesLabel.bottomAnchor, constant: 20).isActive = true
+        repoList.bottomAnchor.constraint(equalTo: safeArea.bottomAnchor).isActive = true
+        repoList.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 10).isActive = true
+        repoList.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -10).isActive = true
     }
     
-//    func setupLabel() {
-//        view.addSubview(repositoriesLabel)
-//
-//        repositoriesLabel.topAnchor.constraint(equalTo: safeArea.topAnchor).isActive = true
-//        repositoriesLabel.bottomAnchor.constraint(equalTo: repoList.bottomAnchor).isActive = true
-//        repositoriesLabel.rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true
-//        repositoriesLabel.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 20).isActive = true
-//    }
+    func setupRepoLabel() {
+        view.addSubview(repositoriesLabel)
+
+        repositoriesLabel.topAnchor.constraint(equalTo: safeArea.topAnchor, constant: 10).isActive = true
+        repositoriesLabel.rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true
+        repositoriesLabel.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 20).isActive = true
+    }
+    
+    func setupInitialLabel() {
+        view.addSubview(initialRepoLabel)
+        
+        initialRepoLabel.topAnchor.constraint(equalTo: safeArea.topAnchor).isActive = true
+        initialRepoLabel.bottomAnchor.constraint(equalTo: safeArea.bottomAnchor).isActive = true
+        initialRepoLabel.rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true
+        initialRepoLabel.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
+    }
 }

@@ -9,6 +9,6 @@ import Foundation
 
 struct Owner: Codable {
     let login: String
-    var avatarUrl: String
-    let htmlUrl: String
+    var avatarUrl: URL
+    let htmlUrl: URL
 }
