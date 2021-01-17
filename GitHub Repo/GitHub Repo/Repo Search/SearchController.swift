@@ -63,7 +63,9 @@ class SearchController: UIViewController, UISearchBarDelegate {
     }()
     
     lazy var avatarImage: UIImage = {
-        let avatar = UIImage()
+        var avatar = UIImage()
+        
+        avatar = UIImage(named: "launchScreenLogo.png")!
 
         return avatar
     }()
@@ -155,18 +157,23 @@ extension SearchController: UITableViewDelegate, UITableViewDataSource {
         cell.layer.borderColor = UIColor.white.cgColor
 
         let item = items[indexPath.row]
-        let owner = owners[indexPath.row]
         
-        var image = UIImage(named: "launchScreenLogo.png")
-        if let data = try? Data(contentsOf: owner.avatarUrl) {
-            image = UIImage(data: data)!
+        if let data = try? Data(contentsOf: item.owner.avatarUrl) {
+            avatarImage = UIImage(data: data)!
         }
 
         cell.repoTitle.text = item.name
         cell.starsNumber.text = item.stargazersCount.description
-        cell.avatar.image = image
+        cell.avatar.image = avatarImage
 
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let item = items[indexPath.row]
+        
+        print("Repo name: \(item.name)")
+        print("Login \(item.owner.login)")
     }
 }
 
