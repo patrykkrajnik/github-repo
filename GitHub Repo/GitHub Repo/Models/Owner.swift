@@ -8,7 +8,7 @@
 import Foundation
 
 struct Owner: Codable {
-    let login: String
+    var login: String
     var avatarUrl: URL
-    let htmlUrl: URL
+    var htmlUrl: URL
 }

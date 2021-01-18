@@ -7,10 +7,11 @@
 
 import UIKit
 
-class SearchController: UIViewController, UISearchBarDelegate {
+class SearchViewController: UIViewController, UISearchBarDelegate {
     
     var items = [Item]()
-    var owners = [Owner]()
+    
+    weak var coordinator: AppCoordinator?
     
     var isFirstSearchingDone = false
     var safeArea: UILayoutGuide!
@@ -56,7 +57,7 @@ class SearchController: UIViewController, UISearchBarDelegate {
         label.text = "Search repositories to display results"
         label.translatesAutoresizingMaskIntoConstraints = false
         label.font = UIFont.systemFont(ofSize: 18, weight: .medium)
-        label.textColor = UIColor.lightGray
+        label.textColor = UIColor.lightText
         label.textAlignment = .center
 
         return label
@@ -73,7 +74,7 @@ class SearchController: UIViewController, UISearchBarDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         safeArea = view.layoutMarginsGuide
-        self.view.backgroundColor = .white
+        self.view.backgroundColor = .systemBackground
         setupRepoLabel()
         setupInitialLabel()
         self.title = "Search"
@@ -103,9 +104,6 @@ class SearchController: UIViewController, UISearchBarDelegate {
         
         if let jsonItems = try? decoder.decode(Repositories.self, from: json) {
             items = jsonItems.items
-            for item in jsonItems.items {
-                owners.append(item.owner)
-            }
         }
     }
     
@@ -125,7 +123,7 @@ class SearchController: UIViewController, UISearchBarDelegate {
 
 }
 
-extension SearchController: UISearchResultsUpdating {
+extension SearchViewController: UISearchResultsUpdating {
     func updateSearchResults(for searchController: UISearchController) {
         if isFiltering() {
             initialRepoLabel.removeFromSuperview()
@@ -133,7 +131,7 @@ extension SearchController: UISearchResultsUpdating {
     }
 }
 
-extension SearchController: UITableViewDelegate, UITableViewDataSource {
+extension SearchViewController: UITableViewDelegate, UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
@@ -154,7 +152,7 @@ extension SearchController: UITableViewDelegate, UITableViewDataSource {
         cell.layer.cornerRadius = 20
         cell.backgroundColor = .systemGray6
         cell.layer.borderWidth = 5.0
-        cell.layer.borderColor = UIColor.white.cgColor
+        cell.layer.borderColor = UIColor.systemBackground.cgColor
 
         let item = items[indexPath.row]
         
@@ -171,14 +169,14 @@ extension SearchController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let item = items[indexPath.row]
+        tableView.deselectRow(at: indexPath, animated: true)
         
-        print("Repo name: \(item.name)")
-        print("Login \(item.owner.login)")
+        coordinator?.showDetails(repoName: item.name, stargazersCount: item.stargazersCount, authorName: item.owner.login, htmlUrl: item.owner.htmlUrl, avatarUrl: item.owner.avatarUrl)
     }
 }
 
 
-extension SearchController {
+extension SearchViewController {
     func setupElements() {
         view.addSubview(repoList)
         
