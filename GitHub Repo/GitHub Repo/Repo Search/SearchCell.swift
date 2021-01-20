@@ -20,7 +20,7 @@ class SearchCell: UITableViewCell {
     let starsNumber: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.font = UIFont.systemFont(ofSize: 16)
+        label.font = UIFont.systemFont(ofSize: 16, weight: .semibold)
         label.textColor = UIColor.lightGray
         
         return label
@@ -43,7 +43,7 @@ class SearchCell: UITableViewCell {
         addSubview(starsNumber)
         addSubview(avatar)
         
-        repoTitle.topAnchor.constraint(equalTo: topAnchor, constant: 25).isActive = true
+        repoTitle.topAnchor.constraint(equalTo: topAnchor, constant: 30).isActive = true
         repoTitle.leftAnchor.constraint(equalTo: leftAnchor, constant: 100).isActive = true
         repoTitle.rightAnchor.constraint(equalTo: rightAnchor).isActive = true
         
