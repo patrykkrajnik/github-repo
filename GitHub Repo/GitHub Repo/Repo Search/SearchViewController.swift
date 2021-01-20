@@ -59,7 +59,7 @@ class SearchViewController: UIViewController, UISearchBarDelegate {
         label.text = "Search repositories to display results"
         label.translatesAutoresizingMaskIntoConstraints = false
         label.font = UIFont.systemFont(ofSize: 18*scaleRatio, weight: .medium)
-        label.textColor = UIColor.lightText
+        label.textColor = UIColor.systemGray4
         label.textAlignment = .center
 
         return label
@@ -74,10 +74,6 @@ class SearchViewController: UIViewController, UISearchBarDelegate {
     }()
 
     override func viewDidLoad() {
-        if scaleRatio >= 1 {
-            scaleRatio = UIScreen.main.bounds.height / UIScreen.main.bounds.height
-        }
-        
         super.viewDidLoad()
         safeArea = view.layoutMarginsGuide
         self.view.backgroundColor = .systemBackground

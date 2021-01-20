@@ -12,7 +12,7 @@ class DetailsCell: UITableViewCell {
     let commitNumber: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.font = UIFont.systemFont(ofSize: 18, weight: .regular)
+        label.font = UIFont.systemFont(ofSize: 18, weight: .semibold)
         label.textColor = .black
         label.backgroundColor = .systemGray6
         label.layer.masksToBounds = true
@@ -25,7 +25,7 @@ class DetailsCell: UITableViewCell {
     let commitAuthor: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.font = UIFont.systemFont(ofSize: 12, weight: .regular)
+        label.font = UIFont.systemFont(ofSize: 12, weight: .semibold)
         label.text = "COMMIT AUTHOR NAME"
         label.textColor = .systemBlue
         
@@ -35,7 +35,7 @@ class DetailsCell: UITableViewCell {
     let authorEmail: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.font = UIFont.systemFont(ofSize: 16)
+        label.font = UIFont.systemFont(ofSize: 16, weight: .regular)
         label.text = "email@authorname.com"
         label.textColor = .label
         
