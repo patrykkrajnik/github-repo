@@ -16,12 +16,14 @@ class SearchViewController: UIViewController, UISearchBarDelegate {
     var isFirstSearchingDone = false
     var safeArea: UILayoutGuide!
     
+    var scaleRatio = UIScreen.main.bounds.height / 844
+    
     lazy var repoList: UITableView = {
         let tableView = UITableView()
         tableView.translatesAutoresizingMaskIntoConstraints = false
         tableView.delegate = self
         tableView.dataSource = self
-        tableView.register(SearchCell.self, forCellReuseIdentifier: "cell")
+        tableView.register(SearchCell.self, forCellReuseIdentifier: "searchCell")
         tableView.separatorStyle = .none
 
         return tableView
@@ -46,7 +48,7 @@ class SearchViewController: UIViewController, UISearchBarDelegate {
 
         label.text = "Repositories"
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.font = UIFont.systemFont(ofSize: 24, weight: .bold)
+        label.font = UIFont.systemFont(ofSize: 24*scaleRatio, weight: .bold)
 
         return label
     }()
@@ -56,7 +58,7 @@ class SearchViewController: UIViewController, UISearchBarDelegate {
 
         label.text = "Search repositories to display results"
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.font = UIFont.systemFont(ofSize: 18, weight: .medium)
+        label.font = UIFont.systemFont(ofSize: 18*scaleRatio, weight: .medium)
         label.textColor = UIColor.lightText
         label.textAlignment = .center
 
@@ -72,6 +74,10 @@ class SearchViewController: UIViewController, UISearchBarDelegate {
     }()
 
     override func viewDidLoad() {
+        if scaleRatio >= 1 {
+            scaleRatio = UIScreen.main.bounds.height / UIScreen.main.bounds.height
+        }
+        
         super.viewDidLoad()
         safeArea = view.layoutMarginsGuide
         self.view.backgroundColor = .systemBackground
@@ -145,7 +151,7 @@ extension SearchViewController: UITableViewDelegate, UITableViewDataSource {
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as?
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "searchCell", for: indexPath) as?
                 SearchCell else { return UITableViewCell() }
         cell.accessoryType = .disclosureIndicator
         cell.clipsToBounds = true
@@ -180,18 +186,18 @@ extension SearchViewController {
     func setupElements() {
         view.addSubview(repoList)
         
-        repoList.topAnchor.constraint(equalTo: repositoriesLabel.bottomAnchor, constant: 20).isActive = true
+        repoList.topAnchor.constraint(equalTo: repositoriesLabel.bottomAnchor, constant: 20*scaleRatio).isActive = true
         repoList.bottomAnchor.constraint(equalTo: safeArea.bottomAnchor).isActive = true
-        repoList.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 10).isActive = true
-        repoList.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -10).isActive = true
+        repoList.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 10*scaleRatio).isActive = true
+        repoList.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -10*scaleRatio).isActive = true
     }
     
     func setupRepoLabel() {
         view.addSubview(repositoriesLabel)
 
-        repositoriesLabel.topAnchor.constraint(equalTo: safeArea.topAnchor, constant: 10).isActive = true
+        repositoriesLabel.topAnchor.constraint(equalTo: safeArea.topAnchor, constant: 10*scaleRatio).isActive = true
         repositoriesLabel.rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true
-        repositoriesLabel.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 20).isActive = true
+        repositoriesLabel.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 20*scaleRatio).isActive = true
     }
     
     func setupInitialLabel() {
