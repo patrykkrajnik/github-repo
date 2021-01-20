@@ -12,7 +12,7 @@ class SearchCell: UITableViewCell {
     let repoTitle: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.font = UIFont.systemFont(ofSize: 18, weight: .bold)
+        label.font = UIFont.systemFont(ofSize: 18, weight: .semibold)
         
         return label
     }()
@@ -20,7 +20,7 @@ class SearchCell: UITableViewCell {
     let starsNumber: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.font = UIFont.systemFont(ofSize: 16, weight: .medium)
+        label.font = UIFont.systemFont(ofSize: 16)
         label.textColor = UIColor.lightGray
         
         return label
