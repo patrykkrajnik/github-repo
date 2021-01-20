@@ -22,25 +22,44 @@ class DetailsViewController: UIViewController, UIScrollViewDelegate {
     var labelCommitsHistory: UILabel!
     
     var viewOnlineButton: UIButton!
+    var shareRepoButton: UIButton!
     
     var authorName: String = ""
     var repoName: String = ""
     var htmlUrl: String = ""
     var avatarUrl: String = ""
     var stargazersCount: String = ""
+    
+    var scaleRatio = UIScreen.main.bounds.height / 844
+    
+    lazy var commitsList: UITableView = {
+        let tableView = UITableView()
+        tableView.translatesAutoresizingMaskIntoConstraints = false
+        tableView.delegate = self
+        tableView.dataSource = self
+        tableView.register(DetailsCell.self, forCellReuseIdentifier: "detailsCell")
+        tableView.tableFooterView = UIView()
+        tableView.alwaysBounceVertical = false
+        
+        return tableView
+    }()
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        if scaleRatio >= 1 {
+            scaleRatio = UIScreen.main.bounds.height / UIScreen.main.bounds.height
+        }
         
         setupNavBar()
         createView()
         setViewConstraints()
         
-        labelRepoName.font = UIFont.systemFont(ofSize: 20, weight: .semibold)
+        labelRepoName.font = UIFont.systemFont(ofSize: 20*scaleRatio, weight: .medium)
         labelRepoName.textColor = .label
         labelRepoName.text = repoName
         
-        labelStargazersCount.font = UIFont.systemFont(ofSize: 14, weight: .semibold)
+        labelStargazersCount.font = UIFont.systemFont(ofSize: 14*scaleRatio, weight: .semibold)
         labelStargazersCount.textColor = .lightText
         labelStargazersCount.text = "Number of Stars (\(stargazersCount))"
         
@@ -48,18 +67,31 @@ class DetailsViewController: UIViewController, UIScrollViewDelegate {
         labelHeaderRepo.textColor = .lightText
         labelHeaderRepo.text = "REPO BY"
         
-        labelRepoAuthor.font = UIFont.systemFont(ofSize: 32, weight: .bold)
+        labelRepoAuthor.font = UIFont.systemFont(ofSize: 32*scaleRatio, weight: .bold)
         labelRepoAuthor.textColor = .white
         labelRepoAuthor.text = authorName
+        
+        labelCommitsHistory.font = UIFont.systemFont(ofSize: 24*scaleRatio, weight: .bold)
+        labelCommitsHistory.textColor = .label
+        labelCommitsHistory.text = "Commits History"
         
         viewOnlineButton.backgroundColor = .systemGray6
         viewOnlineButton.showsTouchWhenHighlighted = true
         viewOnlineButton.setTitleColor(.systemBlue, for: .normal)
-        viewOnlineButton.titleLabel?.font = UIFont.boldSystemFont(ofSize: 16)
+        viewOnlineButton.titleLabel?.font = UIFont.boldSystemFont(ofSize: 16*scaleRatio)
         viewOnlineButton.clipsToBounds = true
-        viewOnlineButton.layer.cornerRadius = 20.0
+        viewOnlineButton.layer.cornerRadius = 15.0
         viewOnlineButton.setTitle("VIEW ONLINE", for: .normal)
         viewOnlineButton.addTarget(self, action: #selector(viewRepoOnline(sender:)), for: .touchUpInside)
+        
+        shareRepoButton.backgroundColor = .systemGray6
+        shareRepoButton.showsTouchWhenHighlighted = true
+        shareRepoButton.setTitleColor(.systemBlue, for: .normal)
+        shareRepoButton.titleLabel?.font = UIFont.boldSystemFont(ofSize: 18*scaleRatio)
+        shareRepoButton.clipsToBounds = true
+        shareRepoButton.layer.cornerRadius = 10.0
+        shareRepoButton.setTitle("Share Repo", for: .normal)
+        shareRepoButton.addTarget(self, action: #selector(shareRepo(sender:)), for: .touchUpInside)
         
         self.view.backgroundColor = .systemBackground
         navigationController?.navigationBar.prefersLargeTitles = true
@@ -77,6 +109,10 @@ class DetailsViewController: UIViewController, UIScrollViewDelegate {
         if UIApplication.shared.canOpenURL(url) {
             UIApplication.shared.open(url, options: [:], completionHandler: nil)
         }
+    }
+    
+    @objc func shareRepo(sender: UIButton!) {
+        print(htmlUrl)
     }
     
     func setupNavBar() {
@@ -109,8 +145,17 @@ class DetailsViewController: UIViewController, UIScrollViewDelegate {
         labelRepoAuthor.numberOfLines = 0
         scrollView.addSubview(labelRepoAuthor)
         
+        labelCommitsHistory = UILabel()
+        labelCommitsHistory.numberOfLines = 0
+        scrollView.addSubview(labelCommitsHistory)
+        
         viewOnlineButton = UIButton()
         scrollView.addSubview(viewOnlineButton)
+        
+        shareRepoButton = UIButton()
+        scrollView.addSubview(shareRepoButton)
+        
+        scrollView.addSubview(commitsList)
 
         imageView.clipsToBounds = true
         imageView.backgroundColor = .white
@@ -126,11 +171,11 @@ class DetailsViewController: UIViewController, UIScrollViewDelegate {
         scrollView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
         
         labelRepoName.translatesAutoresizingMaskIntoConstraints = false
-        labelRepoName.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20).isActive = true
-        labelRepoName.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -10).isActive = true
-        labelRepoName.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor, constant: -10).isActive = true
-        labelRepoName.topAnchor.constraint(equalTo: scrollView.topAnchor, constant: 180).isActive = true
-        labelRepoName.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 20).isActive = true
+        labelRepoName.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20*scaleRatio).isActive = true
+        labelRepoName.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -10*scaleRatio).isActive = true
+        labelRepoName.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor, constant: -10*scaleRatio).isActive = true
+        labelRepoName.topAnchor.constraint(equalTo: scrollView.topAnchor, constant: 180*scaleRatio).isActive = true
+        labelRepoName.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 20*scaleRatio).isActive = true
         
         let headerContainerViewBottom: NSLayoutConstraint!
         headerContainerView.translatesAutoresizingMaskIntoConstraints = false
@@ -138,7 +183,7 @@ class DetailsViewController: UIViewController, UIScrollViewDelegate {
         headerContainerView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
         headerContainerView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
         
-        headerContainerViewBottom = headerContainerView.bottomAnchor.constraint(equalTo: labelRepoName.topAnchor, constant: -20)
+        headerContainerViewBottom = headerContainerView.bottomAnchor.constraint(equalTo: labelRepoName.topAnchor, constant: -20*scaleRatio)
         headerContainerViewBottom.priority = UILayoutPriority(rawValue: 900)
         headerContainerViewBottom.isActive = true
         
@@ -153,27 +198,44 @@ class DetailsViewController: UIViewController, UIScrollViewDelegate {
         imageViewTopConstraint.isActive = true
         
         labelStargazersCount.translatesAutoresizingMaskIntoConstraints = false
-        labelStargazersCount.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20).isActive = true
-        labelStargazersCount.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -10).isActive = true
-        labelStargazersCount.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 20).isActive = true
-        labelStargazersCount.bottomAnchor.constraint(equalTo: headerContainerView.bottomAnchor, constant: -20).isActive = true
+        labelStargazersCount.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20*scaleRatio).isActive = true
+        labelStargazersCount.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -10*scaleRatio).isActive = true
+        labelStargazersCount.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 20*scaleRatio).isActive = true
+        labelStargazersCount.bottomAnchor.constraint(equalTo: headerContainerView.bottomAnchor, constant: -20*scaleRatio).isActive = true
         
         labelRepoAuthor.translatesAutoresizingMaskIntoConstraints = false
-        labelRepoAuthor.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20).isActive = true
-        labelRepoAuthor.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -10).isActive = true
-        labelRepoAuthor.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 20).isActive = true
-        labelRepoAuthor.bottomAnchor.constraint(equalTo: labelStargazersCount.topAnchor, constant: -10).isActive = true
+        labelRepoAuthor.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20*scaleRatio).isActive = true
+        labelRepoAuthor.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -10*scaleRatio).isActive = true
+        labelRepoAuthor.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 20*scaleRatio).isActive = true
+        labelRepoAuthor.bottomAnchor.constraint(equalTo: labelStargazersCount.topAnchor, constant: -10*scaleRatio).isActive = true
         
         labelHeaderRepo.translatesAutoresizingMaskIntoConstraints = false
-        labelHeaderRepo.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20).isActive = true
-        labelHeaderRepo.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -10).isActive = true
-        labelHeaderRepo.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 20).isActive = true
-        labelHeaderRepo.bottomAnchor.constraint(equalTo: labelRepoAuthor.topAnchor, constant: -5).isActive = true
+        labelHeaderRepo.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20*scaleRatio).isActive = true
+        labelHeaderRepo.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -10*scaleRatio).isActive = true
+        labelHeaderRepo.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 20*scaleRatio).isActive = true
+        labelHeaderRepo.bottomAnchor.constraint(equalTo: labelRepoAuthor.topAnchor, constant: -5*scaleRatio).isActive = true
+        
+        labelCommitsHistory.translatesAutoresizingMaskIntoConstraints = false
+        labelCommitsHistory.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20*scaleRatio).isActive = true
+        labelCommitsHistory.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -10*scaleRatio).isActive = true
+        labelCommitsHistory.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 20*scaleRatio).isActive = true
+        labelCommitsHistory.topAnchor.constraint(equalTo: labelRepoName.bottomAnchor, constant: 40*scaleRatio).isActive = true
         
         viewOnlineButton.translatesAutoresizingMaskIntoConstraints = false
-        viewOnlineButton.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -20).isActive = true
-        viewOnlineButton.topAnchor.constraint(equalTo: scrollView.topAnchor, constant: 175).isActive = true
-        viewOnlineButton.widthAnchor.constraint(equalToConstant: 140).isActive = true
+        viewOnlineButton.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -20*scaleRatio).isActive = true
+        viewOnlineButton.topAnchor.constraint(equalTo: scrollView.topAnchor, constant: 175*scaleRatio).isActive = true
+        viewOnlineButton.widthAnchor.constraint(equalToConstant: 140*scaleRatio).isActive = true
+        
+        commitsList.topAnchor.constraint(equalTo: labelCommitsHistory.bottomAnchor, constant: 25*scaleRatio).isActive = true
+        commitsList.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
+        commitsList.rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true
+        commitsList.bottomAnchor.constraint(equalTo: shareRepoButton.topAnchor, constant: -20*scaleRatio).isActive = true
+        
+        shareRepoButton.translatesAutoresizingMaskIntoConstraints = false
+        shareRepoButton.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 20*scaleRatio).isActive = true
+        shareRepoButton.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -20*scaleRatio).isActive = true
+        shareRepoButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -40*scaleRatio).isActive = true
+        shareRepoButton.heightAnchor.constraint(equalToConstant: 50*scaleRatio).isActive = true
     }
 }
 
@@ -188,5 +250,29 @@ extension UIImageView {
                 }
             }
         }
+    }
+}
+
+extension DetailsViewController: UITableViewDelegate, UITableViewDataSource {
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 1
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 3
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return UITableView.automaticDimension
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "detailsCell", for: indexPath) as?
+                DetailsCell else { return UITableViewCell() }
+        cell.selectionStyle = UITableViewCell.SelectionStyle.none
+        
+        cell.commitNumber.text = (indexPath.row + 1).description
+        
+        return cell
     }
 }
