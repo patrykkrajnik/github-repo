@@ -47,15 +47,11 @@ class DetailsViewController: UIViewController, UIScrollViewDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        if scaleRatio >= 1 {
-            scaleRatio = UIScreen.main.bounds.height / UIScreen.main.bounds.height
-        }
-        
         setupNavBar()
         createView()
         setViewConstraints()
         
-        labelRepoName.font = UIFont.systemFont(ofSize: 20*scaleRatio, weight: .medium)
+        labelRepoName.font = UIFont.systemFont(ofSize: 18*scaleRatio, weight: .semibold)
         labelRepoName.textColor = .label
         labelRepoName.text = repoName
         
@@ -63,7 +59,7 @@ class DetailsViewController: UIViewController, UIScrollViewDelegate {
         labelStargazersCount.textColor = .lightText
         labelStargazersCount.text = "Number of Stars (\(stargazersCount))"
         
-        labelHeaderRepo.font = UIFont.systemFont(ofSize: 16, weight: .semibold)
+        labelHeaderRepo.font = UIFont.systemFont(ofSize: 14*scaleRatio, weight: .semibold)
         labelHeaderRepo.textColor = .lightText
         labelHeaderRepo.text = "REPO BY"
         
@@ -71,14 +67,14 @@ class DetailsViewController: UIViewController, UIScrollViewDelegate {
         labelRepoAuthor.textColor = .white
         labelRepoAuthor.text = authorName
         
-        labelCommitsHistory.font = UIFont.systemFont(ofSize: 24*scaleRatio, weight: .bold)
+        labelCommitsHistory.font = UIFont.systemFont(ofSize: 22*scaleRatio, weight: .bold)
         labelCommitsHistory.textColor = .label
         labelCommitsHistory.text = "Commits History"
         
         viewOnlineButton.backgroundColor = .systemGray6
         viewOnlineButton.showsTouchWhenHighlighted = true
         viewOnlineButton.setTitleColor(.systemBlue, for: .normal)
-        viewOnlineButton.titleLabel?.font = UIFont.boldSystemFont(ofSize: 16*scaleRatio)
+        viewOnlineButton.titleLabel?.font = UIFont.systemFont(ofSize: 16*scaleRatio, weight: .semibold)
         viewOnlineButton.clipsToBounds = true
         viewOnlineButton.layer.cornerRadius = 15.0
         viewOnlineButton.setTitle("VIEW ONLINE", for: .normal)
@@ -87,7 +83,7 @@ class DetailsViewController: UIViewController, UIScrollViewDelegate {
         shareRepoButton.backgroundColor = .systemGray6
         shareRepoButton.showsTouchWhenHighlighted = true
         shareRepoButton.setTitleColor(.systemBlue, for: .normal)
-        shareRepoButton.titleLabel?.font = UIFont.boldSystemFont(ofSize: 18*scaleRatio)
+        shareRepoButton.titleLabel?.font = UIFont.systemFont(ofSize: 18*scaleRatio, weight: .semibold)
         shareRepoButton.clipsToBounds = true
         shareRepoButton.layer.cornerRadius = 10.0
         shareRepoButton.setTitle("Share Repo", for: .normal)
@@ -95,6 +91,7 @@ class DetailsViewController: UIViewController, UIScrollViewDelegate {
         
         self.view.backgroundColor = .systemBackground
         navigationController?.navigationBar.prefersLargeTitles = true
+        self.navigationItem.backBarButtonItem?.title = "Back"
         
         print("Repo URL: \(htmlUrl)")
         print("Author Name: \(authorName)")
@@ -219,14 +216,14 @@ class DetailsViewController: UIViewController, UIScrollViewDelegate {
         labelCommitsHistory.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20*scaleRatio).isActive = true
         labelCommitsHistory.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -10*scaleRatio).isActive = true
         labelCommitsHistory.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 20*scaleRatio).isActive = true
-        labelCommitsHistory.topAnchor.constraint(equalTo: labelRepoName.bottomAnchor, constant: 40*scaleRatio).isActive = true
+        labelCommitsHistory.topAnchor.constraint(equalTo: labelRepoName.bottomAnchor, constant: 30*scaleRatio).isActive = true
         
         viewOnlineButton.translatesAutoresizingMaskIntoConstraints = false
         viewOnlineButton.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -20*scaleRatio).isActive = true
         viewOnlineButton.topAnchor.constraint(equalTo: scrollView.topAnchor, constant: 175*scaleRatio).isActive = true
         viewOnlineButton.widthAnchor.constraint(equalToConstant: 140*scaleRatio).isActive = true
         
-        commitsList.topAnchor.constraint(equalTo: labelCommitsHistory.bottomAnchor, constant: 25*scaleRatio).isActive = true
+        commitsList.topAnchor.constraint(equalTo: labelCommitsHistory.bottomAnchor, constant: 15*scaleRatio).isActive = true
         commitsList.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
         commitsList.rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true
         commitsList.bottomAnchor.constraint(equalTo: shareRepoButton.topAnchor, constant: -20*scaleRatio).isActive = true

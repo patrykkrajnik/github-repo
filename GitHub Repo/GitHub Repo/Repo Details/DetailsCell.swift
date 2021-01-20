@@ -12,7 +12,7 @@ class DetailsCell: UITableViewCell {
     let commitNumber: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.font = UIFont.systemFont(ofSize: 18, weight: .medium)
+        label.font = UIFont.systemFont(ofSize: 18, weight: .regular)
         label.textColor = .black
         label.backgroundColor = .systemGray6
         label.layer.masksToBounds = true
@@ -25,7 +25,7 @@ class DetailsCell: UITableViewCell {
     let commitAuthor: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.font = UIFont.systemFont(ofSize: 12, weight: .medium)
+        label.font = UIFont.systemFont(ofSize: 12, weight: .regular)
         label.text = "COMMIT AUTHOR NAME"
         label.textColor = .systemBlue
         
@@ -46,7 +46,7 @@ class DetailsCell: UITableViewCell {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.font = UIFont.systemFont(ofSize: 18)
-        label.text = "This is a short commit message."
+        label.text = "This is a short commit message. This is a short commit message."
         label.numberOfLines = 2
         label.textColor = .lightGray
         
