@@ -109,7 +109,13 @@ class DetailsViewController: UIViewController, UIScrollViewDelegate {
     }
     
     @objc func shareRepo(sender: UIButton!) {
-        print(htmlUrl)
+        let textToShare = "Check GitHub repository named \(repoName) created by \(authorName)!"
+        
+        if let gitHubWebsite = URL(string: htmlUrl) {
+            let objectToShare = [textToShare, gitHubWebsite] as [Any]
+            let activityVC = UIActivityViewController(activityItems: objectToShare, applicationActivities: nil)
+            self.present(activityVC, animated: true, completion: nil)
+        }
     }
     
     func setupNavBar() {
