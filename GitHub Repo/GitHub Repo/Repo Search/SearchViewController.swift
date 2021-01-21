@@ -121,7 +121,9 @@ class SearchViewController: UIViewController, UISearchBarDelegate {
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         let query = searchBar.text!
-        prepareToParse(query: query)
+        let safeQuery = query.replacingOccurrences(of: " ", with: "")
+        print(safeQuery)
+        prepareToParse(query: safeQuery)
         repoList.reloadData()
     }
 }
