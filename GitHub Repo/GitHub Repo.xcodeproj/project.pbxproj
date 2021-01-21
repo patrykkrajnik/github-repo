@@ -12,6 +12,9 @@
 		DC0B1D4425B04F4300E11E82 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC0B1D4325B04F4300E11E82 /* SearchViewController.swift */; };
 		DC0B1D4925B04F4400E11E82 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DC0B1D4825B04F4400E11E82 /* Assets.xcassets */; };
 		DC0B1D4C25B04F4400E11E82 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DC0B1D4A25B04F4400E11E82 /* LaunchScreen.storyboard */; };
+		DC46D5AE25B97BF300751282 /* Commits.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC46D5AD25B97BF300751282 /* Commits.swift */; };
+		DC46D5B125B97C3900751282 /* Author.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC46D5B025B97C3900751282 /* Author.swift */; };
+		DC46D5B425B97CED00751282 /* Commit.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC46D5B325B97CED00751282 /* Commit.swift */; };
 		DC59AD0C25B721D3009E326E /* DetailsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC59AD0B25B721D3009E326E /* DetailsCell.swift */; };
 		DCB8D29625B5A208002062C6 /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCB8D29525B5A208002062C6 /* Coordinator.swift */; };
 		DCB8D29925B5A280002062C6 /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCB8D29825B5A280002062C6 /* AppCoordinator.swift */; };
@@ -30,6 +33,9 @@
 		DC0B1D4825B04F4400E11E82 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		DC0B1D4B25B04F4400E11E82 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		DC0B1D4D25B04F4400E11E82 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		DC46D5AD25B97BF300751282 /* Commits.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Commits.swift; sourceTree = "<group>"; };
+		DC46D5B025B97C3900751282 /* Author.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Author.swift; sourceTree = "<group>"; };
+		DC46D5B325B97CED00751282 /* Commit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Commit.swift; sourceTree = "<group>"; };
 		DC59AD0B25B721D3009E326E /* DetailsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsCell.swift; sourceTree = "<group>"; };
 		DCB8D29525B5A208002062C6 /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
 		DCB8D29825B5A280002062C6 /* AppCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCoordinator.swift; sourceTree = "<group>"; };
@@ -83,6 +89,26 @@
 			path = "GitHub Repo";
 			sourceTree = "<group>";
 		};
+		DC46D5AB25B97BB100751282 /* Repositories */ = {
+			isa = PBXGroup;
+			children = (
+				DCBAAB4925B0B32E00445F95 /* Repositories.swift */,
+				DCD87E1325B211E100B2DDB6 /* Item.swift */,
+				DCBAAB5025B0B86900445F95 /* Owner.swift */,
+			);
+			path = Repositories;
+			sourceTree = "<group>";
+		};
+		DC46D5AC25B97BBB00751282 /* Commits */ = {
+			isa = PBXGroup;
+			children = (
+				DC46D5AD25B97BF300751282 /* Commits.swift */,
+				DC46D5B325B97CED00751282 /* Commit.swift */,
+				DC46D5B025B97C3900751282 /* Author.swift */,
+			);
+			path = Commits;
+			sourceTree = "<group>";
+		};
 		DCB8D29425B5A1D3002062C6 /* Coordinator */ = {
 			isa = PBXGroup;
 			children = (
@@ -95,9 +121,8 @@
 		DCBAAB4525B0B2C400445F95 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				DCBAAB4925B0B32E00445F95 /* Repositories.swift */,
-				DCD87E1325B211E100B2DDB6 /* Item.swift */,
-				DCBAAB5025B0B86900445F95 /* Owner.swift */,
+				DC46D5AB25B97BB100751282 /* Repositories */,
+				DC46D5AC25B97BBB00751282 /* Commits */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -189,7 +214,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DC46D5AE25B97BF300751282 /* Commits.swift in Sources */,
 				DCB8D29625B5A208002062C6 /* Coordinator.swift in Sources */,
+				DC46D5B425B97CED00751282 /* Commit.swift in Sources */,
 				DC0B1D4425B04F4300E11E82 /* SearchViewController.swift in Sources */,
 				DCD87E1425B211E100B2DDB6 /* Item.swift in Sources */,
 				DCBAAB3E25B0812200445F95 /* SearchCell.swift in Sources */,
@@ -197,6 +224,7 @@
 				DCBAAB4A25B0B32E00445F95 /* Repositories.swift in Sources */,
 				DC59AD0C25B721D3009E326E /* DetailsCell.swift in Sources */,
 				DCB8D29925B5A280002062C6 /* AppCoordinator.swift in Sources */,
+				DC46D5B125B97C3900751282 /* Author.swift in Sources */,
 				DC0B1D4025B04F4300E11E82 /* AppDelegate.swift in Sources */,
 				DC0B1D4225B04F4300E11E82 /* SceneDelegate.swift in Sources */,
 				DCB8D2A225B5AAA7002062C6 /* DetailsViewController.swift in Sources */,

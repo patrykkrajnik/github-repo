@@ -9,6 +9,8 @@ import UIKit
 
 class DetailsViewController: UIViewController, UIScrollViewDelegate {
     
+    var commits = [Commits]()
+    
     weak var coordinator: AppCoordinator?
     
     var scrollView: UIScrollView!
@@ -50,6 +52,7 @@ class DetailsViewController: UIViewController, UIScrollViewDelegate {
         setupNavBar()
         createView()
         setViewConstraints()
+        prepareToParse()
         
         labelRepoName.font = UIFont.systemFont(ofSize: 18*scaleRatio, weight: .semibold)
         labelRepoName.textColor = .label
@@ -115,6 +118,25 @@ class DetailsViewController: UIViewController, UIScrollViewDelegate {
             let objectToShare = [textToShare, gitHubWebsite] as [Any]
             let activityVC = UIActivityViewController(activityItems: objectToShare, applicationActivities: nil)
             self.present(activityVC, animated: true, completion: nil)
+        }
+    }
+    
+    func prepareToParse() {
+        let urlString = "https://api.github.com/repos/\(authorName)/\(repoName)/commits"
+        
+        if let url = URL(string: urlString) {
+            if let data = try? Data(contentsOf: url) {
+                parse(json: data)
+            }
+        }
+    }
+    
+    func parse(json: Data) {
+        let decoder = JSONDecoder()
+        decoder.keyDecodingStrategy = .convertFromSnakeCase
+        
+        if let jsonCommits = try? decoder.decode([Commits].self, from: json) {
+            commits = jsonCommits
         }
     }
     
@@ -274,7 +296,12 @@ extension DetailsViewController: UITableViewDelegate, UITableViewDataSource {
                 DetailsCell else { return UITableViewCell() }
         cell.selectionStyle = UITableViewCell.SelectionStyle.none
         
+        let commit = commits[indexPath.row]
+        
         cell.commitNumber.text = (indexPath.row + 1).description
+        cell.commitMessage.text = commit.commit.message
+        cell.commitAuthor.text = commit.commit.author.name
+        cell.authorEmail.text = commit.commit.author.email
         
         return cell
     }
