@@ -49,6 +49,7 @@ class SearchViewController: UIViewController, UISearchBarDelegate {
         label.text = "Repositories"
         label.translatesAutoresizingMaskIntoConstraints = false
         label.font = UIFont.systemFont(ofSize: 24*scaleRatio, weight: .bold)
+        label.numberOfLines = 1
 
         return label
     }()
@@ -61,6 +62,7 @@ class SearchViewController: UIViewController, UISearchBarDelegate {
         label.font = UIFont.systemFont(ofSize: 18*scaleRatio, weight: .medium)
         label.textColor = UIColor.systemGray4
         label.textAlignment = .center
+        label.numberOfLines = 1
 
         return label
     }()
@@ -192,7 +194,7 @@ extension SearchViewController {
         view.addSubview(repositoriesLabel)
 
         repositoriesLabel.topAnchor.constraint(equalTo: safeArea.topAnchor, constant: 10*scaleRatio).isActive = true
-        repositoriesLabel.rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true
+        repositoriesLabel.rightAnchor.constraint(equalTo: safeArea.rightAnchor).isActive = true
         repositoriesLabel.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 20*scaleRatio).isActive = true
     }
     
@@ -201,7 +203,7 @@ extension SearchViewController {
         
         initialRepoLabel.topAnchor.constraint(equalTo: safeArea.topAnchor).isActive = true
         initialRepoLabel.bottomAnchor.constraint(equalTo: safeArea.bottomAnchor).isActive = true
-        initialRepoLabel.rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true
-        initialRepoLabel.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
+        initialRepoLabel.rightAnchor.constraint(equalTo: safeArea.rightAnchor).isActive = true
+        initialRepoLabel.leftAnchor.constraint(equalTo: safeArea.leftAnchor).isActive = true
     }
 }

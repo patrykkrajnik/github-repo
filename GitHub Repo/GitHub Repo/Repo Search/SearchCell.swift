@@ -13,6 +13,7 @@ class SearchCell: UITableViewCell {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.font = UIFont.systemFont(ofSize: 18, weight: .semibold)
+        label.numberOfLines = 1
         
         return label
     }()
@@ -22,6 +23,7 @@ class SearchCell: UITableViewCell {
         label.translatesAutoresizingMaskIntoConstraints = false
         label.font = UIFont.systemFont(ofSize: 16, weight: .semibold)
         label.textColor = UIColor.lightGray
+        label.numberOfLines = 1
         
         return label
     }()
@@ -45,7 +47,7 @@ class SearchCell: UITableViewCell {
         
         repoTitle.topAnchor.constraint(equalTo: topAnchor, constant: 30).isActive = true
         repoTitle.leftAnchor.constraint(equalTo: leftAnchor, constant: 100).isActive = true
-        repoTitle.rightAnchor.constraint(equalTo: rightAnchor).isActive = true
+        repoTitle.rightAnchor.constraint(equalTo: rightAnchor, constant: -40).isActive = true
         
         starsNumber.topAnchor.constraint(equalTo: topAnchor, constant: 30).isActive = true
         starsNumber.leftAnchor.constraint(equalTo: leftAnchor, constant: 100).isActive = true

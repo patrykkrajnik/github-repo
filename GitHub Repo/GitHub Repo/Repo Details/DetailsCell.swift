@@ -18,6 +18,7 @@ class DetailsCell: UITableViewCell {
         label.layer.masksToBounds = true
         label.layer.cornerRadius = 20.0
         label.textAlignment = .center
+        label.numberOfLines = 1
         
         return label
     }()
@@ -28,6 +29,7 @@ class DetailsCell: UITableViewCell {
         label.font = UIFont.systemFont(ofSize: 12, weight: .semibold)
         label.text = "COMMIT AUTHOR NAME"
         label.textColor = .systemBlue
+        label.numberOfLines = 1
         
         return label
     }()
@@ -38,6 +40,7 @@ class DetailsCell: UITableViewCell {
         label.font = UIFont.systemFont(ofSize: 16, weight: .regular)
         label.text = "email@authorname.com"
         label.textColor = .label
+        label.numberOfLines = 1
         
         return label
     }()
@@ -46,7 +49,7 @@ class DetailsCell: UITableViewCell {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.font = UIFont.systemFont(ofSize: 18)
-        label.text = "This is a short commit message. This is a short commit message."
+        label.text = "API rate limit exceeded. Please check later."
         label.numberOfLines = 2
         label.textColor = .lightGray
         
@@ -67,9 +70,11 @@ class DetailsCell: UITableViewCell {
         
         commitAuthor.leftAnchor.constraint(equalTo: leftAnchor, constant: 80).isActive = true
         commitAuthor.topAnchor.constraint(equalTo: topAnchor, constant: 10).isActive = true
+        commitAuthor.rightAnchor.constraint(equalTo: rightAnchor, constant: -20).isActive = true
         
         authorEmail.leftAnchor.constraint(equalTo: leftAnchor, constant: 80).isActive = true
         authorEmail.topAnchor.constraint(equalTo: commitAuthor.bottomAnchor, constant: 5).isActive = true
+        authorEmail.rightAnchor.constraint(equalTo: rightAnchor, constant: -20).isActive = true
         
         commitMessage.leftAnchor.constraint(equalTo: leftAnchor, constant: 80).isActive = true
         commitMessage.topAnchor.constraint(equalTo: authorEmail.bottomAnchor, constant: 5).isActive = true
