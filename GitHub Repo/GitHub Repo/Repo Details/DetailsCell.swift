@@ -26,7 +26,7 @@ class DetailsCell: UITableViewCell {
     let commitAuthor: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.font = UIFont.systemFont(ofSize: 12, weight: .semibold)
+        label.font = UIFont.systemFont(ofSize: 14, weight: .regular)
         label.text = "COMMIT AUTHOR NAME"
         label.textColor = .systemBlue
         label.numberOfLines = 1

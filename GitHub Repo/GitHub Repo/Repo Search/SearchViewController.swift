@@ -124,7 +124,6 @@ class SearchViewController: UIViewController, UISearchBarDelegate {
         prepareToParse(query: query)
         repoList.reloadData()
     }
-
 }
 
 extension SearchViewController: UISearchResultsUpdating {
