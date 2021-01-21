@@ -57,6 +57,7 @@ class DetailsViewController: UIViewController, UIScrollViewDelegate {
         labelRepoName.font = UIFont.systemFont(ofSize: 18*scaleRatio, weight: .semibold)
         labelRepoName.textColor = .label
         labelRepoName.text = repoName
+        labelRepoName.numberOfLines = 2
         
         labelStargazersCount.font = UIFont.systemFont(ofSize: 14*scaleRatio, weight: .semibold)
         labelStargazersCount.textColor = .lightText
@@ -197,10 +198,10 @@ class DetailsViewController: UIViewController, UIScrollViewDelegate {
         
         labelRepoName.translatesAutoresizingMaskIntoConstraints = false
         labelRepoName.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20*scaleRatio).isActive = true
-        labelRepoName.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -10*scaleRatio).isActive = true
         labelRepoName.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor, constant: -10*scaleRatio).isActive = true
         labelRepoName.topAnchor.constraint(equalTo: scrollView.topAnchor, constant: 180*scaleRatio).isActive = true
         labelRepoName.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 20*scaleRatio).isActive = true
+        labelRepoName.rightAnchor.constraint(equalTo: viewOnlineButton.leftAnchor, constant: -20*scaleRatio).isActive = true
         
         let headerContainerViewBottom: NSLayoutConstraint!
         headerContainerView.translatesAutoresizingMaskIntoConstraints = false
@@ -284,7 +285,16 @@ extension DetailsViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 3
+        switch commits.count {
+        case 0:
+            return 1
+        case 1:
+            return 1
+        case 2:
+            return 2
+        default:
+            return 3
+        }
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -296,12 +306,14 @@ extension DetailsViewController: UITableViewDelegate, UITableViewDataSource {
                 DetailsCell else { return UITableViewCell() }
         cell.selectionStyle = UITableViewCell.SelectionStyle.none
         
-        let commit = commits[indexPath.row]
+        if !(commits.isEmpty) {
+            let commit = commits[indexPath.row]
+            cell.commitMessage.text = commit.commit.message
+            cell.commitAuthor.text = commit.commit.author.name
+            cell.authorEmail.text = commit.commit.author.email
+        }
         
         cell.commitNumber.text = (indexPath.row + 1).description
-        cell.commitMessage.text = commit.commit.message
-        cell.commitAuthor.text = commit.commit.author.name
-        cell.authorEmail.text = commit.commit.author.email
         
         return cell
     }
