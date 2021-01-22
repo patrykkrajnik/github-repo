@@ -31,7 +31,6 @@ class SearchViewController: UIViewController, UISearchBarDelegate {
     
     lazy var searchBar: UISearchController = {
         let searchController = UISearchController(searchResultsController: nil)
-        searchController.searchResultsUpdater = self
         
         searchController.obscuresBackgroundDuringPresentation = false
         searchController.searchBar.placeholder = "Search Repositories..."
@@ -100,6 +99,7 @@ class SearchViewController: UIViewController, UISearchBarDelegate {
         isFirstSearchingDone = true
         
         if isFirstSearchingDone {
+            initialRepoLabel.removeFromSuperview()
             setupElements()
         }
         
@@ -111,28 +111,11 @@ class SearchViewController: UIViewController, UISearchBarDelegate {
         }
     }
     
-    func isSearchBarEmpty() -> Bool {
-        return searchBar.searchBar.text?.isEmpty ?? true
-    }
-    
-    func isFiltering() -> Bool {
-        return searchBar.isActive && (!isSearchBarEmpty())
-    }
-    
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         let query = searchBar.text!
         let safeQuery = query.replacingOccurrences(of: " ", with: "")
-        print(safeQuery)
         prepareToParse(query: safeQuery)
         repoList.reloadData()
-    }
-}
-
-extension SearchViewController: UISearchResultsUpdating {
-    func updateSearchResults(for searchController: UISearchController) {
-        if isFiltering() {
-            initialRepoLabel.removeFromSuperview()
-        }
     }
 }
 
