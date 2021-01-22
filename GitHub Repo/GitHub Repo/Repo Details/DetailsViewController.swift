@@ -16,6 +16,7 @@ class DetailsViewController: UIViewController, UIScrollViewDelegate {
     var scrollView: UIScrollView!
     var headerContainerView: UIView!
     var imageView = UIImageView()
+    let image = UIImage(named: "Share.png")
     
     var labelRepoName: UILabel!
     var labelStargazersCount: UILabel!
@@ -92,6 +93,11 @@ class DetailsViewController: UIViewController, UIScrollViewDelegate {
         shareRepoButton.layer.cornerRadius = 10.0
         shareRepoButton.setTitle("Share Repo", for: .normal)
         shareRepoButton.addTarget(self, action: #selector(shareRepo(sender:)), for: .touchUpInside)
+        shareRepoButton.setImage(image, for: .normal)
+        shareRepoButton.imageView?.contentMode = .scaleAspectFit
+        shareRepoButton.tintColor = .systemBlue
+        shareRepoButton.tin
+        shareRepoButton.imageEdgeInsets = UIEdgeInsets(top: 10*scaleRatio, left: -5*scaleRatio, bottom: 10*scaleRatio, right: 0)
         
         self.view.backgroundColor = .systemBackground
         navigationController?.navigationBar.prefersLargeTitles = true
