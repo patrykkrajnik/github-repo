@@ -46,6 +46,18 @@ class DetailsViewController: UIViewController, UIScrollViewDelegate {
         
         return tableView
     }()
+    
+    let starIcon: UIImageView = {
+        var image = UIImageView()
+        let starImage = UIImage(named: "Star-filled.png")
+        
+        image = UIImageView(image: starImage)
+        //image.translatesAutoresizingMaskIntoConstraints = false
+        image.contentMode = .scaleAspectFit
+        image.tintColor = .lightGray
+        
+        return image
+    }()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -169,6 +181,8 @@ class DetailsViewController: UIViewController, UIScrollViewDelegate {
         labelStargazersCount.numberOfLines = 0
         scrollView.addSubview(labelStargazersCount)
         
+        scrollView.addSubview(starIcon)
+        
         labelHeaderRepo = UILabel()
         labelHeaderRepo.numberOfLines = 0
         scrollView.addSubview(labelHeaderRepo)
@@ -229,10 +243,14 @@ class DetailsViewController: UIViewController, UIScrollViewDelegate {
         imageViewTopConstraint.priority = UILayoutPriority(rawValue: 900)
         imageViewTopConstraint.isActive = true
         
+        starIcon.translatesAutoresizingMaskIntoConstraints = false
+        starIcon.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 20*scaleRatio).isActive = true
+        starIcon.bottomAnchor.constraint(equalTo: headerContainerView.bottomAnchor, constant: -20*scaleRatio).isActive = true
+        starIcon.heightAnchor.constraint(equalToConstant: 20*scaleRatio).isActive = true
+        starIcon.widthAnchor.constraint(equalToConstant: 20*scaleRatio).isActive = true
+        
         labelStargazersCount.translatesAutoresizingMaskIntoConstraints = false
-        labelStargazersCount.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20*scaleRatio).isActive = true
-        labelStargazersCount.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -10*scaleRatio).isActive = true
-        labelStargazersCount.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 20*scaleRatio).isActive = true
+        labelStargazersCount.leftAnchor.constraint(equalTo: starIcon.rightAnchor, constant: 5*scaleRatio).isActive = true
         labelStargazersCount.bottomAnchor.constraint(equalTo: headerContainerView.bottomAnchor, constant: -20*scaleRatio).isActive = true
         
         labelRepoAuthor.translatesAutoresizingMaskIntoConstraints = false
