@@ -32,10 +32,10 @@ Application made for iPhone that lets user to browse GitHub repositories. Find r
 - Button that allows to share chosen repository
 
 ## Project structure
-- [`GitHub Repo/Repo Search`](GitHub Repo/Repo Search) - 
-- [`GitHub Repo/Repo Details`](GitHub Repo/Repo Details) - 
-- [`GitHub Repo/Models`](GitHub Repo/Models) - 
-- [`GitHub Repo/Coordinator`](GitHub Repo/Coordinator) - 
+- [`GitHub Repo/Repo Search`](GitHub Repo/GitHub Repo/Repo Search) - 
+- [`GitHub Repo/Repo Details`](GitHub Repo/GitHub Repo/Repo Details) - 
+- [`GitHub Repo/Models`](GitHub Repo/GitHub Repo/Models) - 
+- [`GitHub Repo/Coordinator`](GitHub Repo/GitHub Repo/Coordinator) - 
 
 ## Usage
 Clone this repository, open at the Xcode and turn it on at your iPhone using `Command + R`.
