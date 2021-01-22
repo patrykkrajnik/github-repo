@@ -10,14 +10,12 @@ Application made for iPhone that lets user to browse GitHub repositories. Find r
 ## Screenshots
 ### Light mode
 <div align="center">
-    <img src="images/screenshotFirstLaunchLight.PNG" alt="FirstLaunchLight" width="35%">
     <img src="images/screenshotSearchResultsLight.PNG" alt="SearchResultsLight" width="35%">
     <img src="images/screenshotRepoDetailsLight.PNG" alt="RepoDetailsLight" width="35%">
 </div>
 
 ### Dark mode
 <div align="center">
-    <img src="images/screenshotFirstLaunchDark.PNG" alt="FirstLaunchDark" width="35%">
     <img src="images/screenshotSearchResultsDark.PNG" alt="SearchResultsDark" width="35%">
     <img src="images/screenshotRepoDetailsDark.PNG" alt="RepoDetailsDark" width="35%">
 </div>
@@ -32,10 +30,10 @@ Application made for iPhone that lets user to browse GitHub repositories. Find r
 - Button that allows to share chosen repository
 
 ## Project structure
-- [`GitHub Repo/Repo Search`](GitHub%20Repo/GitHub%20Repo/Repo%20Search) - 
-- [`GitHub Repo/Repo Details`](GitHub%20Repo/GitHub%20Repo/Repo%20Details) - 
-- [`GitHub Repo/Models`](GitHub%20Repo/GitHub%20Repo/Models) - 
-- [`GitHub Repo/Coordinator`](GitHub%20Repo/GitHub%20Repo/Coordinator) - 
+- [`GitHub Repo/Repo Search`](GitHub%20Repo/GitHub%20Repo/Repo%20Search) - components responsible for a Search View Controller
+- [`GitHub Repo/Repo Details`](GitHub%20Repo/GitHub%20Repo/Repo%20Details) - components responsible for a Details View Controller
+- [`GitHub Repo/Models`](GitHub%20Repo/GitHub%20Repo/Models) - structures to store downloaded data
+- [`GitHub Repo/Coordinator`](GitHub%20Repo/GitHub%20Repo/Coordinator) - application flow between View Controllers
 
 ## Usage
 Clone this repository, open at the Xcode and turn it on at your iPhone using `Command + R`.
