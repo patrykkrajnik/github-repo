@@ -245,9 +245,9 @@ class DetailsViewController: UIViewController, UIScrollViewDelegate {
         
         starIcon.translatesAutoresizingMaskIntoConstraints = false
         starIcon.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 20*scaleRatio).isActive = true
-        starIcon.bottomAnchor.constraint(equalTo: headerContainerView.bottomAnchor, constant: -20*scaleRatio).isActive = true
-        starIcon.heightAnchor.constraint(equalToConstant: 20*scaleRatio).isActive = true
-        starIcon.widthAnchor.constraint(equalToConstant: 20*scaleRatio).isActive = true
+        starIcon.bottomAnchor.constraint(equalTo: headerContainerView.bottomAnchor, constant: -22*scaleRatio).isActive = true
+        starIcon.heightAnchor.constraint(equalToConstant: 15*scaleRatio).isActive = true
+        starIcon.widthAnchor.constraint(equalToConstant: 15*scaleRatio).isActive = true
         
         labelStargazersCount.translatesAutoresizingMaskIntoConstraints = false
         labelStargazersCount.leftAnchor.constraint(equalTo: starIcon.rightAnchor, constant: 5*scaleRatio).isActive = true

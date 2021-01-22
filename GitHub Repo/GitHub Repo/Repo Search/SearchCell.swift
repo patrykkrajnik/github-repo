@@ -62,7 +62,7 @@ class SearchCell: UITableViewCell {
         repoTitle.leftAnchor.constraint(equalTo: leftAnchor, constant: 100).isActive = true
         repoTitle.rightAnchor.constraint(equalTo: rightAnchor, constant: -40).isActive = true
         
-        starIcon.topAnchor.constraint(equalTo: repoTitle.bottomAnchor, constant: 5).isActive = true
+        starIcon.topAnchor.constraint(equalTo: repoTitle.bottomAnchor, constant: 7).isActive = true
         starIcon.leftAnchor.constraint(equalTo: leftAnchor, constant: 100).isActive = true
         starIcon.heightAnchor.constraint(equalToConstant: 15).isActive = true
         starIcon.widthAnchor.constraint(equalToConstant: 15).isActive = true
