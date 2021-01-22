@@ -16,19 +16,22 @@ class AppCoordinator: Coordinator {
     }
     
     func start() {
-        let vc = SearchViewController()
-        vc.coordinator = self
-        navigationController.pushViewController(vc, animated: false)
+        let initialViewController = SearchViewController()
+        initialViewController.coordinator = self
+        navigationController.pushViewController(initialViewController, animated: false)
     }
     
     func showDetails(repoName: String, stargazersCount: Int, authorName: String, htmlUrl: URL, avatarUrl: URL) {
-        let vc = DetailsViewController()
-        vc.authorName = authorName
-        vc.repoName = repoName
-        vc.htmlUrl = htmlUrl.absoluteString
-        vc.stargazersCount = stargazersCount.description
-        vc.avatarUrl = avatarUrl.absoluteString
-        vc.coordinator = self
-        navigationController.pushViewController(vc, animated: true)
+        let secondViewController = DetailsViewController()
+        
+        //Data that is passed to second ViewController
+        secondViewController.authorName = authorName
+        secondViewController.repoName = repoName
+        secondViewController.htmlUrl = htmlUrl.absoluteString
+        secondViewController.stargazersCount = stargazersCount.description
+        secondViewController.avatarUrl = avatarUrl.absoluteString
+        
+        secondViewController.coordinator = self
+        navigationController.pushViewController(secondViewController, animated: true)
     }
 }
