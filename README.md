@@ -8,14 +8,14 @@ Application made for iPhone that allows user to browse GitHub repositories. Find
 
 
 ## Screenshots
-# Light mode
+### Light mode
 <div align="center">
     <img src="images/screenshotFirstLaunchLight.PNG" alt="Menu" width="35%">
     <img src="images/screenshotSearchResultsLight.PNG" alt="Game" width="35%">
     <img src="images/screenshotRepoDetailsLight.PNG" alt="Game" width="35%">
 </div>
 
-# Dark mode
+### Dark mode
 <div align="center">
     <img src="images/screenshotFirstLaunchDark.PNG" alt="Menu" width="35%">
     <img src="images/screenshotSearchResultsDark.PNG" alt="Game" width="35%">
