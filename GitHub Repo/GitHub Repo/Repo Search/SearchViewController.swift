@@ -148,9 +148,9 @@ extension SearchViewController: UITableViewDelegate, UITableViewDataSource {
             avatarImage = UIImage(data: data)!
         }
 
-        cell.repoTitle.text = item.name
-        cell.starsNumber.text = item.stargazersCount.description
-        cell.avatar.image = avatarImage
+        cell.repoTitleLabel.text = item.name
+        cell.starsNumberLabel.text = item.stargazersCount.description
+        cell.avatarImage.image = avatarImage
 
         return cell
     }
