@@ -4,32 +4,38 @@
 
 
 # GitHub Repo [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](http://makeapullrequest.com)
-Application made for iPhone that allows user to browse GitHub repositories. Find repository that you are looking for, check it's details and share with your friends!
+Application made for iPhone that lets user to browse GitHub repositories. Find repository that you are looking for, check it's details and share with your friends!
 
 
 ## Screenshots
 ### Light mode
 <div align="center">
-    <img src="images/screenshotFirstLaunchLight.PNG" alt="Menu" width="35%">
-    <img src="images/screenshotSearchResultsLight.PNG" alt="Game" width="35%">
-    <img src="images/screenshotRepoDetailsLight.PNG" alt="Game" width="35%">
+    <img src="images/screenshotFirstLaunchLight.PNG" alt="FirstLaunchLight" width="35%">
+    <img src="images/screenshotSearchResultsLight.PNG" alt="SearchResultsLight" width="35%">
+    <img src="images/screenshotRepoDetailsLight.PNG" alt="RepoDetailsLight" width="35%">
 </div>
 
 ### Dark mode
 <div align="center">
-    <img src="images/screenshotFirstLaunchDark.PNG" alt="Menu" width="35%">
-    <img src="images/screenshotSearchResultsDark.PNG" alt="Game" width="35%">
-    <img src="images/screenshotRepoDetailsDark.PNG" alt="Game" width="35%">
+    <img src="images/screenshotFirstLaunchDark.PNG" alt="FirstLaunchDark" width="35%">
+    <img src="images/screenshotSearchResultsDark.PNG" alt="SearchResultsDark" width="35%">
+    <img src="images/screenshotRepoDetailsDark.PNG" alt="RepoDetailsDark" width="35%">
 </div>
 
 
 ## Features
+- Content based at [GitHub API](https://docs.github.com/en/rest)
 - Support for light and dark mode
 - Searching 20 the most popular repositories according to searched name
 - Displaying last 3 commits of the chosen repository
 - Button that allows to open repository in a browser
 - Button that allows to share chosen repository
 
+## Project structure
+- ['GitHub Repo/Repo Search'](GitHub%20Repo/Repo%20Search) - 
+- ['GitHub Repo/Repo Details'](GitHub%20Repo/Repo%20Details) - 
+- ['GitHub Repo/Models'](GitHub%20Repo/Models) - 
+- ['GitHub Repo/Coordinator'](GitHub%20Repo/Coordinator) - 
 
 ## Usage
 Clone this repository, open at the Xcode and turn it on at your iPhone using `Command + R`.
