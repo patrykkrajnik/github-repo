@@ -38,21 +38,38 @@ class SearchCell: UITableViewCell {
         return image
     }()
     
+    let starIcon: UIImageView = {
+        var image = UIImageView()
+        let starImage = UIImage(named: "Star.png")
+        
+        image = UIImageView(image: starImage)
+        image.translatesAutoresizingMaskIntoConstraints = false
+        image.contentMode = .scaleAspectFit
+        image.tintColor = .lightGray
+        
+        return image
+    }()
+    
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
         addSubview(repoTitle)
         addSubview(starsNumber)
         addSubview(avatar)
+        addSubview(starIcon)
         
         repoTitle.topAnchor.constraint(equalTo: topAnchor, constant: 30).isActive = true
         repoTitle.leftAnchor.constraint(equalTo: leftAnchor, constant: 100).isActive = true
         repoTitle.rightAnchor.constraint(equalTo: rightAnchor, constant: -40).isActive = true
         
-        starsNumber.topAnchor.constraint(equalTo: topAnchor, constant: 30).isActive = true
-        starsNumber.leftAnchor.constraint(equalTo: leftAnchor, constant: 100).isActive = true
+        starIcon.topAnchor.constraint(equalTo: repoTitle.bottomAnchor, constant: 5).isActive = true
+        starIcon.leftAnchor.constraint(equalTo: leftAnchor, constant: 100).isActive = true
+        starIcon.heightAnchor.constraint(equalToConstant: 15).isActive = true
+        starIcon.widthAnchor.constraint(equalToConstant: 15).isActive = true
+        
+        starsNumber.topAnchor.constraint(equalTo: repoTitle.bottomAnchor, constant: 5).isActive = true
+        starsNumber.leftAnchor.constraint(equalTo: starIcon.rightAnchor, constant: 5).isActive = true
         starsNumber.rightAnchor.constraint(equalTo: rightAnchor).isActive = true
-        starsNumber.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
         
         avatar.topAnchor.constraint(equalTo: topAnchor, constant: 20).isActive = true
         avatar.leftAnchor.constraint(equalTo: leftAnchor, constant: 20).isActive = true

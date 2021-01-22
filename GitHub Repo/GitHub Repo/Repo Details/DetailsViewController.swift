@@ -96,7 +96,6 @@ class DetailsViewController: UIViewController, UIScrollViewDelegate {
         shareRepoButton.setImage(image, for: .normal)
         shareRepoButton.imageView?.contentMode = .scaleAspectFit
         shareRepoButton.tintColor = .systemBlue
-        shareRepoButton.tin
         shareRepoButton.imageEdgeInsets = UIEdgeInsets(top: 10*scaleRatio, left: -5*scaleRatio, bottom: 10*scaleRatio, right: 0)
         
         self.view.backgroundColor = .systemBackground
