@@ -102,6 +102,7 @@ class SearchViewController: UIViewController, UISearchBarDelegate {
         
         let decoder = JSONDecoder()
         decoder.keyDecodingStrategy = .convertFromSnakeCase
+        
         if let jsonItems = try? decoder.decode(Repositories.self, from: json) {
             items = jsonItems.items
         }
